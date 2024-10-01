@@ -1,12 +1,15 @@
+package isolationForest;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * This csv reader splits values with ";" because that's what was used on the testing dataset for isolationForest.
+ */
 public class csvReader {
-
-    public List<List<String>> readCSV(String filePath) {
+        public List<List<String>> readCSV(String filePath) {
         try {
             List<List<String>> data = new ArrayList<>(); // Creates a list of lists to store data.
 			String csvFilePath = filePath;
@@ -15,7 +18,7 @@ public class csvReader {
 			String line = bufferedReader.readLine();
 
             while(line != null) {
-                List<String> lineData = Arrays.asList(line.split(","));
+                List<String> lineData = Arrays.asList(line.split(";"));
 				data.add(lineData);
 				line = bufferedReader.readLine();
             }
