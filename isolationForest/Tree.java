@@ -8,12 +8,14 @@ public class Tree {
     private int maxDepth;
     public List<Node> allLeafNodes;
     public List<Node> shortestPathLeafNodes;
+    public List<List<String>> dataPathLengths;
 
     public Tree(int maxDepth) {
         root = null;
         this.maxDepth = maxDepth;
         this.allLeafNodes = new ArrayList<>();
         this.shortestPathLeafNodes = new ArrayList<>();
+        this.dataPathLengths = new ArrayList<>();
     }
 
     public Node getRoot() {
@@ -27,8 +29,15 @@ public class Tree {
     private Node buildTree(List<List<String>> data, int depth) {
         
         if (depth >= maxDepth) { // For the leaf nodes.
-            Node leaf = new Node(data.size(), depth);
+            Node leaf = new Node(data, data.size(), depth);
             allLeafNodes.add(leaf);
+
+            for (int i = 0; i < data.size(); i++) {
+                List<String> each_data = data.get(i);
+                each_data.add(Integer.toString(depth));
+                dataPathLengths.add(each_data);
+            }
+
             return leaf;
         }
 
@@ -48,8 +57,15 @@ public class Tree {
         }
 
         if (leftData.isEmpty() && rightData.isEmpty()) {
-            Node leaf = new Node(data.size(), depth);
+            Node leaf = new Node(data, data.size(), depth);
             allLeafNodes.add(leaf);
+
+            for (int i = 0; i < data.size(); i++) {
+                List<String> each_data = data.get(i);
+                each_data.add(Integer.toString(depth));
+                dataPathLengths.add(each_data);
+            }
+
             return leaf;
         }
 
@@ -58,17 +74,31 @@ public class Tree {
         if (!leftData.isEmpty()) {
             internalNode.setLeft(buildTree(leftData, depth + 1));
         } else {
-            Node leaf = new Node(data.size(), depth);
+            Node leaf = new Node(leftData, leftData.size(), depth);
             allLeafNodes.add(leaf);
             internalNode.setLeft(leaf);
+
+            for (int i = 0; i < leftData.size(); i++) {
+                List<String> each_data = leftData.get(i);
+                each_data.add(Integer.toString(depth));
+                dataPathLengths.add(each_data);
+            }
+
         }
     
         if (!rightData.isEmpty()) {
             internalNode.setRight(buildTree(rightData, depth + 1));
         } else {
-            Node leaf = new Node(data.size(), depth);
+            Node leaf = new Node(rightData, rightData.size(), depth);
             allLeafNodes.add(leaf);
             internalNode.setRight(leaf);
+
+            for (int i = 0; i < rightData.size(); i++) {
+                List<String> each_data = rightData.get(i);
+                each_data.add(Integer.toString(depth));
+                dataPathLengths.add(each_data);
+            }
+
         }
 
         return internalNode;

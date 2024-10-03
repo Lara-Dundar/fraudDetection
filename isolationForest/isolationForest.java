@@ -15,19 +15,17 @@ public class isolationForest {
             System.out.println("Data is empty or no attributes found.");
             return;
         }*/
-
-        Tree tree = new Tree(8);
         
         /*int attributeIndex =tree.randomAttributeSelection(data);
         System.err.println(attributeIndex);
         double value = tree.randomSplittingValueSelection(data,attributeIndex);
         System.err.println(value);*/
 
-        tree.insertNode(data);
-        System.out.println("Tree structure and splits:");
-        tree.printTree(tree.getRoot(),"");
-        System.out.println(tree.allLeafNodes.size());
-        System.out.println(tree.getShortestPaths(tree.allLeafNodes).size());
+        // System.out.println("Tree structure and splits:");
+        // tree.printTree(tree.getRoot(),"");
+
+        Forest forest = new Forest(10);
+        forest.createForest(data);
+
     }
-    
 }

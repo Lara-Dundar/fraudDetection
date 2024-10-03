@@ -1,5 +1,7 @@
 package isolationForest;
 
+import java.util.List;
+
 public class Node {
     private Node left;
     private Node right;
@@ -8,6 +10,7 @@ public class Node {
     private boolean isLeaf;
     private int sizeOfDataInLeaf;
     private int pathLength;
+    private List<List<String>> dataPoints;
 
     public Node(int attributeIndex, double splitValue) {
         this. attributeIndex = attributeIndex;
@@ -17,18 +20,19 @@ public class Node {
         this.isLeaf = false;
     }
 
-    public Node(int sizeOfDataInLeaf, int pathLength) {
+    public Node(List<List<String>> dataPoints, int sizeOfDataInLeaf, int pathLength) {
         this.sizeOfDataInLeaf = sizeOfDataInLeaf;
-        this.isLeaf = true;
         this.left = null;
         this.right = null;
         this.pathLength = pathLength;
+        this.isLeaf = true;
+        this.dataPoints = dataPoints;
     }
 
     // This method is here to test if splitting works correctly.
     public void printNode() {
         if (isLeaf) {
-            System.out.println("Leaf Node: Size of data = " + sizeOfDataInLeaf + ", Path Length = " + pathLength);
+            System.out.println("Leaf Node: Size of data = " + sizeOfDataInLeaf + ", Path Length = " + pathLength + ", Data Points = " + dataPoints);
         } else {
             System.out.println("Split Node: Attribute Index = " + attributeIndex + ", Split Value = " + splitValue);
         }
@@ -79,6 +83,10 @@ public class Node {
 
     public void setPathLength(int pathLength) {
         this.pathLength = pathLength;
+    }
+
+    public List<List<String>> getDataPoints() {
+        return dataPoints;
     }
 
 }
