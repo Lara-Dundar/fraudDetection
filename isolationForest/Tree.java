@@ -6,10 +6,14 @@ import java.util.List;
 public class Tree {
     private Node root;
     private int maxDepth;
+    public List<Node> allLeafNodes;
+    public List<Node> shortestPathLeafNodes;
 
     public Tree(int maxDepth) {
         root = null;
         this.maxDepth = maxDepth;
+        this.allLeafNodes = new ArrayList<>();
+        this.shortestPathLeafNodes = new ArrayList<>();
     }
 
     public Node getRoot() {
@@ -23,7 +27,9 @@ public class Tree {
     private Node buildTree(List<List<String>> data, int depth) {
         
         if (depth >= maxDepth) { // For the leaf nodes.
-            return new Node(data.size(), depth);
+            Node leaf = new Node(data.size(), depth);
+            allLeafNodes.add(leaf);
+            return leaf;
         }
 
         int randomAttributeIndex = randomAttributeSelection(data);
@@ -42,7 +48,9 @@ public class Tree {
         }
 
         if (leftData.isEmpty() && rightData.isEmpty()) {
-            return new Node(data.size(), depth);
+            Node leaf = new Node(data.size(), depth);
+            allLeafNodes.add(leaf);
+            return leaf;
         }
 
         Node internalNode = new Node(randomAttributeIndex, randomSplittingValue);
@@ -50,13 +58,17 @@ public class Tree {
         if (!leftData.isEmpty()) {
             internalNode.setLeft(buildTree(leftData, depth + 1));
         } else {
-            internalNode.setLeft(new Node(data.size(), depth));
+            Node leaf = new Node(data.size(), depth);
+            allLeafNodes.add(leaf);
+            internalNode.setLeft(leaf);
         }
     
         if (!rightData.isEmpty()) {
             internalNode.setRight(buildTree(rightData, depth + 1));
         } else {
-            internalNode.setRight(new Node(data.size(), depth));
+            Node leaf = new Node(data.size(), depth);
+            allLeafNodes.add(leaf);
+            internalNode.setRight(leaf);
         }
 
         return internalNode;
@@ -97,5 +109,15 @@ public class Tree {
             printTree(node.getLeft(), prefix + "   | ");
             printTree(node.getRight(), prefix + "   | ");
         }
+    }
+
+    public List<Node> getShortestPaths(List<Node> allLeafNodes) {
+
+        for(int i=0 ; i<allLeafNodes.size() ; i++) {
+            if(allLeafNodes.get(i).getPathLength() < maxDepth) {
+                shortestPathLeafNodes.add(allLeafNodes.get(i));
+            }
+        }
+        return shortestPathLeafNodes;
     }
 }

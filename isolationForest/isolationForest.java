@@ -26,6 +26,8 @@ public class isolationForest {
         tree.insertNode(data);
         System.out.println("Tree structure and splits:");
         tree.printTree(tree.getRoot(),"");
+        System.out.println(tree.allLeafNodes.size());
+        System.out.println(tree.getShortestPaths(tree.allLeafNodes).size());
     }
     
 }
