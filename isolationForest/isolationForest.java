@@ -4,7 +4,7 @@ import java.util.List;
 public class isolationForest {
     public static void main(String[] args) {
 
-        String filePath = "data//winequality-red.csv";
+        String filePath = "FraudDetection//data//winequality-red.csv";
 
         csvReader reader = new csvReader();
         List<List<String>> data = reader.readCSV(filePath);

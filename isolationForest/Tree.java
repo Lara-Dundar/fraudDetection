@@ -26,7 +26,7 @@ public class Tree {
             return null;
         }
         if (depth >= maxDepth) { // For the leaf nodes.
-            return new Node(data.size());
+            return new Node(data.size(), depth);
         }
 
         int randomAttributeIndex = randomAttributeSelection(data);

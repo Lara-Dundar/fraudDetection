@@ -7,6 +7,7 @@ public class Node {
     private double splitValue;
     private boolean isLeaf;
     private int sizeOfDataInLeaf;
+    private int pathLength;
 
     public Node(int attributeIndex, double splitValue) {
         this. attributeIndex = attributeIndex;
@@ -16,17 +17,18 @@ public class Node {
         this.isLeaf = false;
     }
 
-    public Node(int sizeOfDataInLeaf) {
+    public Node(int sizeOfDataInLeaf, int pathLength) {
         this.sizeOfDataInLeaf = sizeOfDataInLeaf;
         this.isLeaf = true;
         this.left = null;
         this.right = null;
+        this.pathLength = pathLength;
     }
 
     // This method is here to test if splitting works correctly.
     public void printNode() {
         if (isLeaf) {
-            System.out.println("Leaf Node: Size of data = " + sizeOfDataInLeaf);
+            System.out.println("Leaf Node: Size of data = " + sizeOfDataInLeaf + ", Path Length = " + pathLength);
         } else {
             System.out.println("Split Node: Attribute Index = " + attributeIndex + ", Split Value = " + splitValue);
         }
@@ -69,6 +71,14 @@ public class Node {
 
     public int getSizeOfDataInLeaf() {
         return sizeOfDataInLeaf;
+    }
+
+    public int getPathLength() {
+        return pathLength;
+    }
+
+    public void setPathLength(int pathLength) {
+        this.pathLength = pathLength;
     }
 
 }
