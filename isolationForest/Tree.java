@@ -21,10 +21,7 @@ public class Tree {
     }
 
     private Node buildTree(List<List<String>> data, int depth) {
-
-        if (data.isEmpty()) { // For the root node.
-            return null;
-        }
+        
         if (depth >= maxDepth) { // For the leaf nodes.
             return new Node(data.size(), depth);
         }
@@ -44,10 +41,23 @@ public class Tree {
             }
         }
 
+        if (leftData.isEmpty() && rightData.isEmpty()) {
+            return new Node(data.size(), depth);
+        }
+
         Node internalNode = new Node(randomAttributeIndex, randomSplittingValue);
 
-        internalNode.setLeft(buildTree(leftData, depth + 1));
-        internalNode.setRight(buildTree(rightData, depth + 1));
+        if (!leftData.isEmpty()) {
+            internalNode.setLeft(buildTree(leftData, depth + 1));
+        } else {
+            internalNode.setLeft(new Node(data.size(), depth));
+        }
+    
+        if (!rightData.isEmpty()) {
+            internalNode.setRight(buildTree(rightData, depth + 1));
+        } else {
+            internalNode.setRight(new Node(data.size(), depth));
+        }
 
         return internalNode;
     }

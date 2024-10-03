@@ -16,7 +16,7 @@ public class isolationForest {
             return;
         }*/
 
-        Tree tree = new Tree(5);
+        Tree tree = new Tree(8);
         
         /*int attributeIndex =tree.randomAttributeSelection(data);
         System.err.println(attributeIndex);
