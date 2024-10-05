@@ -26,6 +26,7 @@ public class isolationForest {
 
         Forest forest = new Forest(10);
         forest.createForest(data);
+        forest.printHashMap();
 
     }
 }
